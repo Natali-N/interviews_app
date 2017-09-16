@@ -67,13 +67,8 @@ gulp.task('resources', function() {
 gulp.task('scripts', function() {
     return browserify(
         'src/scripts/app.js',
-        'src/scripts/base.js',
-        'src/scripts/controller.js',
-        'src/scripts/helpers.js',
-        'src/scripts/item.js',
-        'src/scripts/store.js',
-        'src/scripts/template.js',
-        'src/scripts/view.js')
+        'src/scripts/dataService.js',
+        'src/scripts/configService.js')
         .transform('babelify', { presets: ['env'] })
         .bundle()
         .pipe(source('bundle.js'))

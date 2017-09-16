@@ -6,31 +6,62 @@
 		<link rel="stylesheet" href="styles/main.css">
 	</head>
 	<body>
-		<section class="todoapp">
-			<header class="header">
-				<h1>Interviews App</h1>
-				<input class="new-todo" placeholder="What needs to be done?" autofocus>
-			</header>
-			<section style="display:none" class="main">
-				<input class="toggle-all" type="checkbox">
-				<label for="toggle-all">Mark all as complete</label>
-				<ul class="todo-list"></ul>
-				<footer class="footer">
-					<span class="todo-count"></span>
-					<div class="filters">
-						<a href="#/" class="selected">All</a>
-						<a href="#/active">Active</a>
-						<a href="#/completed">Completed</a>
-					</div>
-					<button class="clear-completed">Clear completed</button>
-				</footer>
-			</section>
-		</section>
+		<!--<section class="todoapp">-->
+			<!--<header class="header">-->
+				<!--<h1>Interviews App</h1>-->
+				<!--<input class="new-todo" placeholder="What needs to be done?" autofocus>-->
+			<!--</header>-->
+			<!--<section style="display:none" class="main">-->
+				<!--<input class="toggle-all" type="checkbox">-->
+				<!--<label for="toggle-all">Mark all as complete</label>-->
+				<!--<ul class="todo-list"></ul>-->
+				<!--<footer class="footer">-->
+					<!--<span class="todo-count"></span>-->
+					<!--<div class="filters">-->
+						<!--<a href="#/" class="selected">All</a>-->
+						<!--<a href="#/active">Active</a>-->
+						<!--<a href="#/completed">Completed</a>-->
+					<!--</div>-->
+					<!--<button class="clear-completed">Clear completed</button>-->
+				<!--</footer>-->
+			<!--</section>-->
+		<!--</section>-->
+        <section class="interviewsApp">
+            <header class="header">
+                <h1>Interviews App</h1>
+                <nav class="navigation">
+                    <ul>
+                        <li>
+                            <a href="#/" class="selected">Questions</a>
+                        </li>
+                        <li>
+                            <a href="#/report">Report</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <section class="main">
+                <h2>
+                    Вопросы для собеседования
+                </h2>
+                <div class="list"></div>
+                <button>&plus; Добавить вопрос в список</button>
+            </section>
+        </section>
 		<footer class="info">
-			<p>Double-click to edit a todo</p>
-			<p>Written by <a href="http://twitter.com/lukeed05">Luke Edwards</a></p>
-			<p>Refactored by <a href="https://github.com/xorgy">Aaron Muir Hamilton</a></p>
-			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+            <h3>Баллы расшифровка</h3>
+			<p>
+                <span>0</span> задание не выполнил
+            </p>
+            <p>
+                <span>1</span> выполнил задание с подсказкой/с помощью наводящего вопроса/с ошибками
+            </p>
+            <p>
+                <span>2</span> выполнил задание смостоятельно/с незначительными ошибками
+            </p>
+            <p>
+                <span>3</span> предложил не стандартное/интересное решение/показал, что глубоко знаком с темой
+            </p>
 		</footer>
 		<script src="scripts/bundle.js"></script>
 	</body>
