@@ -33,6 +33,10 @@ const htmlMin = require('gulp-htmlmin');
 const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
 
+const browserify = require('browserify');
+const babelify = require('babelify');
+const source = require('vinyl-source-stream');
+
 var isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 
 gulp.task('styles', function() {   //since
@@ -61,18 +65,19 @@ gulp.task('resources', function() {
 });
 
 gulp.task('scripts', function() {
-    return gulp.src('src/scripts/*.js')
-        .pipe(sourceMaps.init())
-        .pipe(babel({
-            presets: ['env']
-        }))
-        .pipe(concat('bundle.js'))
-        .pipe(sourceMaps.write())
-        //.pipe(eslint({}))
-        //.pipe(eslint.format())
-        //.pipe(eslint.failAfterError())
-        .pipe(gulpIf(!isDevelopment, jsMin()))
-        .pipe(gulp.dest(isDevelopment ? 'dist/dev/scripts' : 'dist/build/scripts'));
+    return browserify(
+        'src/scripts/app.js',
+        'src/scripts/base.js',
+        'src/scripts/controller.js',
+        'src/scripts/helpers.js',
+        'src/scripts/item.js',
+        'src/scripts/store.js',
+        'src/scripts/template.js',
+        'src/scripts/view.js')
+        .transform('babelify', { presets: ['env'] })
+        .bundle()
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest('dist/dev/scripts'));
 });
 
 gulp.task('enable:production', function(callback) {
