@@ -2,11 +2,7 @@ import DataService from './dataService';
 
 const dataService = new DataService('interviews-app');
 
-var z = dataService.getDataFromStorage();
-
-console.log(z.length);
-
-
+//console.log(dataService.getDataFromStorage());
 
 // import Controller from './controller';
 // import {$on} from './helpers';

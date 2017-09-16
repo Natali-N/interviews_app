@@ -5,8 +5,7 @@ export default class DataService {
     constructor(name) {
         this.name = name;
         this.storage = window.localStorage;
-
-        this.writeToStorage(this.getAllQuestions());
+        this.getAllQuestions();
     }
 
     requestDataFromServer(url) {
@@ -36,7 +35,7 @@ export default class DataService {
     getDataFromStorage() {
         let storageData = this.storage.getItem(this.name);
 
-        if (storageData === 'undefined') {
+        if (!storageData) {
             storageData = '[]';
         }
 
@@ -50,7 +49,7 @@ export default class DataService {
                 let dataFromStorage = this.getDataFromStorage();
 
                 if (Array.isArray(dataFromServer) && Array.isArray(dataFromStorage)) {
-                    return dataFromServer.concat(dataFromStorage);
+                    this.writeToStorage(dataFromServer.concat(dataFromStorage));
                 } else {
                     //@todo show error
                     console.log('data from server isn\'t valid');
