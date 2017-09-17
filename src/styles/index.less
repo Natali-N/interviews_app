@@ -12,6 +12,14 @@ body {
     max-width: 900px;
     margin: 0 auto;
     font-weight: 300;
+
+    &.show-spinner {
+        overflow: hidden;
+
+        .spinner {
+            display: block;
+        }
+    }
 }
 
 .interviewsApp {
@@ -59,7 +67,16 @@ body {
     }
 }
 
-
-
-
-
+.spinner {
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    padding-top: 20%;
+    font-size: 2rem;
+    color: #ffffff;
+    display: none;
+}

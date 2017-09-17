@@ -5,10 +5,9 @@ export default class DataService {
     constructor(name) {
         this.name = name;
         this.storage = window.localStorage;
-        this.getAllQuestions();
     }
 
-    requestDataFromServer(url) {
+    _requestDataFromServer(url) {
         return new Promise((resolve, reject) => {
 
             const xhr = new XMLHttpRequest();
@@ -32,24 +31,15 @@ export default class DataService {
         });
     }
 
-    getDataFromStorage() {
-        let storageData = this.storage.getItem(this.name);
-
-        if (!storageData) {
-            storageData = '[]';
-        }
-
-        return JSON.parse(storageData);
-    }
-
     getAllQuestions() {
-        this.requestDataFromServer(configService.dataUrl).then(
+        return this._requestDataFromServer(configService.dataUrl).then(
             response => {
                 let dataFromServer = JSON.parse(response).questions;
-                let dataFromStorage = this.getDataFromStorage();
 
-                if (Array.isArray(dataFromServer) && Array.isArray(dataFromStorage)) {
-                    this.writeToStorage(dataFromServer.concat(dataFromStorage));
+                if (Array.isArray(dataFromServer)) {
+                    this.writeToStorage(dataFromServer);
+
+                    return dataFromServer;
                 } else {
                     //@todo show error
                     console.log('data from server isn\'t valid');
@@ -61,5 +51,16 @@ export default class DataService {
 
     writeToStorage(data) {
         this.storage.setItem(this.name, JSON.stringify(data));
+    }
+
+
+    getDataFromStorage() {
+        let storageData = this.storage.getItem(this.name);
+
+        if (!storageData) {
+            storageData = '[]';
+        }
+
+        return JSON.parse(storageData);
     }
 }
