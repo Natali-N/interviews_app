@@ -6,26 +6,6 @@
 		<link rel="stylesheet" href="styles/main.css">
 	</head>
 	<body>
-		<!--<section class="todoapp">-->
-			<!--<header class="header">-->
-				<!--<h1>Interviews App</h1>-->
-				<!--<input class="new-todo" placeholder="What needs to be done?" autofocus>-->
-			<!--</header>-->
-			<!--<section style="display:none" class="main">-->
-				<!--<input class="toggle-all" type="checkbox">-->
-				<!--<label for="toggle-all">Mark all as complete</label>-->
-				<!--<ul class="todo-list"></ul>-->
-				<!--<footer class="footer">-->
-					<!--<span class="todo-count"></span>-->
-					<!--<div class="filters">-->
-						<!--<a href="#/" class="selected">All</a>-->
-						<!--<a href="#/active">Active</a>-->
-						<!--<a href="#/completed">Completed</a>-->
-					<!--</div>-->
-					<!--<button class="clear-completed">Clear completed</button>-->
-				<!--</footer>-->
-			<!--</section>-->
-		<!--</section>-->
         <section class="interviewsApp">
             <header class="header">
                 <h1>Interviews App</h1>
@@ -47,7 +27,36 @@
                 <div class="questions-list">
 
                 </div>
-                <button>&plus; Добавить вопрос в список</button>
+                <div class="add-form-container">
+                    <form class="add-form">
+                        <label>
+                            Вопрос
+                            <input type="text">
+                        </label>
+                        <label>
+                            Ответ
+                            <textarea></textarea>
+                        </label>
+                        <label>
+                            Строка для отображения в отчете
+                            <input type="text">
+                        </label>
+                        <select>
+                            <option>JD-</option>
+                            <option>JD=</option>
+                            <option>JD+</option>
+                            <option>D-</option>
+                            <option>D=</option>
+                            <option>D+</option>
+                            <option>SD-</option>
+                            <option>SD=</option>
+                            <option>SD+</option>
+                        </select>
+                        <button type="button">&plus; Добавить вопрос в список</button>
+                    </form>
+                    <button class="open-add-form">Создать вопрос</button>
+                </div>
+
             </section>
         </section>
 		<footer class="info">

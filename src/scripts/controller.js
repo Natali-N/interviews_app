@@ -9,12 +9,17 @@ export default class Controller {
 
         //@todo spinner service
         document.querySelector('body').classList.add('show-spinner');
+
         this.dataService.getAllQuestions().then((allQuestions) => {
             this.setView(allQuestions);
 
             //@todo spinner service
             document.querySelector('body').classList.remove('show-spinner');
         });
+
+        this.viewService.bindOpenAddForm();
+        this.viewService.bindShowAnswer();
+
     }
 
     setView(allQuestions) {

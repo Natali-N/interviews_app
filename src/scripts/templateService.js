@@ -5,7 +5,7 @@ export default class TemplateServise {
 
         // @todo has own property
         for (let key in allQuestionsLeveled) {
-            preparedQuestionsList += `<h2>${key}</h2>`
+            preparedQuestionsList += `<h3>${key}</h3>`
                 + this._prepareQuestionsLevelList(allQuestionsLeveled[key]);
         }
 
@@ -31,8 +31,7 @@ export default class TemplateServise {
                     <input type="number" min="0" max="3">
                 </div>
                 <div class="row__notes">
-                    <textarea></textarea>
-                    <button type="button">save</button>
+                    <label>test</label>
                 </div>
             </div>`}, '');
     }

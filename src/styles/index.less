@@ -4,6 +4,14 @@ body {
 	padding: 0;
 }
 
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.4rem;
@@ -79,4 +87,88 @@ body {
     font-size: 2rem;
     color: #ffffff;
     display: none;
+}
+
+.questions-list {
+    padding-bottom:  20px;
+}
+
+h3 {
+    padding: 40px 0 15px;
+    margin: 0;
+    border-bottom: 1px solid #dddddd;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+    border-bottom: 1px solid #dddddd;
+
+    .row__number,
+    .row__content,
+    .row__score,
+    .row__notes {
+        padding-left: 10px;
+    }
+
+    .row__number {
+        flex: 0 0 37px;
+    }
+
+    .row__score {
+        flex: 0 0 50px;
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    .row__notes {
+        width: 100px;
+    }
+
+    .row__content {
+        width: ~"calc(100% - 187px)";
+
+        &.show {
+            .answer {
+                display: block;
+            }
+
+            .question {
+                &:before {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        .question {
+            display: inline-block;
+            padding-right: 20px;
+            position: relative;
+            cursor: pointer;
+
+            &:before {
+                position: absolute;
+                right: 0;
+                content: '\25bc';
+                top: 0;
+            }
+        }
+
+        .answer {
+            display: none;
+        }
+    }
+}
+
+.add-form-container {
+    .add-form {
+        display: none;
+
+        &.show {
+            display: block;
+        }
+    }
 }
