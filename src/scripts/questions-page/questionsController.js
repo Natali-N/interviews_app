@@ -1,29 +1,22 @@
-import { configService } from './configService';
-import DataService from './dataService';
-import ViewService from './viewService';
+import { configService } from './../configService';
+import { configService } from './../dataService';
 
-export default class Controller {
-    constructor(dataService, viewService) {
+export default class QuestionsController {
+
+    constructor(dataService, questionsView) {
         this.dataService = dataService;
-        this.viewService = viewService;
-
-        //@todo spinner service
-        document.querySelector('body').classList.add('show-spinner');
-
-        this.dataService.getAllQuestions().then((allQuestions) => {
-            this.setView(allQuestions);
-
-            //@todo spinner service
-            document.querySelector('body').classList.remove('show-spinner');
-        });
-
-        this.viewService.bindShowAddForm();
-        this.viewService.bindRowActions(this._addNote.bind(this));
-        this.viewService.bindAddToList(this._addToList.bind(this));
+        this.questionsView = questionsView;
     }
 
-    setView(allQuestions) {
-        this.viewService.showData(this._filter(allQuestions));
+    initView() {
+        const allQuestions = this.dataService.getDataFromStorage();
+        this.questionsView.showInitialTemplate();
+        this.questionsView.findElements();
+        this.questionsView.showQuestions(this._filter(allQuestions));
+
+        this.questionsView.bindShowAddForm();
+        this.questionsView.bindRowActions(this._addNote.bind(this));
+        this.questionsView.bindAddToList(this._addToList.bind(this));
     }
 
     _filter(allQuestions) {
@@ -46,7 +39,7 @@ export default class Controller {
 
         this.dataService.writeToStorage(allQuestions);
         this.setView(allQuestions);
-        this.viewService.toggleForm();
+        this.questionsView.toggleAddForm();
     }
 
     _addNote(questionId, note) {

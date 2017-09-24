@@ -68,10 +68,14 @@ gulp.task('scripts', function() {
     return browserify(
         'src/scripts/app.js',
         'src/scripts/dataService.js',
+        'src/scripts/router.js',
         'src/scripts/configService.js',
-        'src/scripts/templateService.js',
-        'src/scripts/viewService.js',
-        'src/scripts/controller.js'
+        'src/scripts/questions-page/questionsController.js',
+        'src/scripts/questions-page/questionsView.js',
+        'src/scripts/questions-page/questionsTemplate.js',
+        'src/scripts/report-page/reportController.js',
+        'src/scripts/report-page/reportView.js',
+        'src/scripts/report-page/reportTemplate.js'
         )
         .transform('babelify', { presets: ['env'] })
         .bundle()

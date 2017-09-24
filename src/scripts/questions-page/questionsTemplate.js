@@ -1,4 +1,48 @@
-export default class TemplateServise {
+export default class QuestionsTemplate {
+
+    prepareInitialTemplate() {
+        return `
+            <h2>
+                Вопросы для собеседования
+            </h2>
+            <div class="questions-list">
+
+            </div>
+            <div class="add-form-container">
+                <form class="add-form">
+                    <label>
+                        Вопрос
+                        <input type="text" name="question">
+                    </label>
+                    <label>
+                        Ответ
+                        <textarea name="answer"></textarea>
+                    </label>
+                    <label>
+                        Строка для отображения в отчете
+                        <input type="text" name="report">
+                    </label>
+                    <select name="level">
+                        <option>JD-</option>
+                        <option>JD=</option>
+                        <option>JD+</option>
+                        <option>D-</option>
+                        <option>D=</option>
+                        <option>D+</option>
+                        <option>SD-</option>
+                        <option>SD=</option>
+                        <option>SD+</option>
+                    </select>
+                    <button type="button" class="add-to-list">&plus; Добавить вопрос в список</button>
+                </form>
+                <button class="show-add-form">Создать вопрос</button>
+            </div>`;
+    }
+
+    prepareReportPage() {
+        return `
+            <h2>Report page</h2>`;
+    }
 
     prepareQuestionsList(allQuestionsLeveled) {
         let preparedQuestionsList = '';

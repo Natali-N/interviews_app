@@ -1,44 +1,38 @@
-import TemplateService from './templateService';
-import { configService } from './configService';
+import { configService } from './../configService';
 
-export default class ViewService {
-    constructor(templateService) {
-        this.templateService = templateService;
-        this.questionPage = document.querySelector('.main');
-        this.questionsList = this.questionPage.querySelector('.questions-list');
-        this.addFormToggle = this.questionPage.querySelector('.show-add-form');
-        this.addFormContainer = this.questionPage.querySelector('.add-form-container');
-        this.addForm = this.addFormContainer.querySelector('.add-form');
+export default class QuestionsView {
+    constructor(questionsTemplate) {
+        this.questionsTemplate = questionsTemplate;
+        this.questionsPage = document.querySelector('.main');
+
         this.questionContainerSelector = '.row__content';
-        this.addToList = this.questionPage.querySelector('.add-to-list');
         this.noteContainerSelector = '.row__note';
         this.noteSelector = '.note';
         this.labelSelector = '.note-text';
-
     }
 
-    showData(allQuestionsLeveled) {
-        this.questionsList.innerHTML = this.templateService.prepareQuestionsList(allQuestionsLeveled);
+    findElements() {
+        this.questionsList = this.questionsPage.querySelector('.questions-list');
+        this.addFormToggle = this.questionsPage.querySelector('.show-add-form');
+        this.addFormContainer = this.questionsPage.querySelector('.add-form-container');
+        this.addForm = this.addFormContainer.querySelector('.add-form');
+        this.addToList = this.questionsPage.querySelector('.add-to-list');
+    }
+
+    showInitialTemplate() {
+        this.questionsPage.innerHTML = this.questionsTemplate.prepareInitialTemplate();
+    }
+
+    showQuestions(allQuestionsLeveled) {
+        this.questionsList.innerHTML = this.questionsTemplate.prepareQuestionsList(allQuestionsLeveled);
     }
 
     bindShowAddForm() {
-        this.addFormToggle.addEventListener('click', this.toggleForm.bind(this));
+        this.addFormToggle.addEventListener('click', this.toggleAddForm.bind(this));
     }
 
-    toggleForm() {
+    toggleAddForm() {
         this.addFormContainer.classList.toggle(configService.classForOpenItem);
-    }
-
-    bindAddToList(handler) {
-        //@todo form fields validation
-        this.addToList.addEventListener('click', () => {
-            handler({
-                question: this.addForm.elements.question.value,
-                answer: this.addForm.elements.answer.value,
-                report: this.addForm.elements.report.value,
-                level: this.addForm.elements.level.value
-            });
-        });
     }
 
     bindRowActions(addNoteHandler) {
@@ -80,5 +74,17 @@ export default class ViewService {
 
     _bindEditNote(clickedElement) {
         clickedElement.closest(this.noteContainerSelector).classList.toggle(configService.classForOpenItem);
+    }
+
+    bindAddToList(handler) {
+        //@todo form fields validation
+        this.addToList.addEventListener('click', () => {
+            handler({
+                question: this.addForm.elements.question.value,
+                answer: this.addForm.elements.answer.value,
+                report: this.addForm.elements.report.value,
+                level: this.addForm.elements.level.value
+            });
+        });
     }
 }
