@@ -1,6 +1,6 @@
 const configService = {
     dataUrl: 'resources/questions.json',
-    levels: ['JD-', 'JD=', 'JD+', 'D-'],
+    levels: ['JD-', 'JD=', 'JD+', 'D-', 'D=', 'D+','SD-', 'SD=', 'SD+'],
     classForOpenItem: 'show'
 };
 

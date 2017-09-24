@@ -63,7 +63,10 @@ export default class DataService {
                 }
             });
 
-            data = dataInStorage;
+            data = dataInStorage.map(function(question) {
+                question.note = '';
+                return question;
+            });
         }
 
         this.storage.setItem(this.name, JSON.stringify(data));

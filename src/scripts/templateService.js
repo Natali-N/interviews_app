@@ -5,8 +5,10 @@ export default class TemplateServise {
 
         // @todo has own property
         for (let key in allQuestionsLeveled) {
-            preparedQuestionsList += `<h3>${key}</h3>`
-                + this._prepareQuestionsLevelList(allQuestionsLeveled[key]);
+            if (allQuestionsLeveled[key].length) {
+                preparedQuestionsList += `<h3>${key}</h3>`
+                    + this._prepareQuestionsLevelList(allQuestionsLeveled[key]);
+            }
         }
         return preparedQuestionsList;
     }
@@ -16,12 +18,13 @@ export default class TemplateServise {
             return previousQuestionsPrepared + `
             <div class="row">
                 <div class="row__number">${index + 1}</div>` + this._prepareQuestionContent(currentQuestion) +
-                `<div class="row__note">
+                `<div class="row__note show">
                     <div class="edit-note">
-                        <textarea id="${currentQuestion.id}"></textarea>
+                        <textarea id="${currentQuestion.id}" class="note"></textarea>
                         <button type="button" class="add-note">&plus;</button>
                     </div>
-                    <label></label>
+                    <label class="note-text"></label>
+                    ${currentQuestion.note}
                 </div>
                 <div class="row__score">
                     <input type="number" min="0" max="3">

@@ -17,10 +17,9 @@ export default class Controller {
             document.querySelector('body').classList.remove('show-spinner');
         });
 
-        this.viewService.bindOpenAddForm();
-        this.viewService.bindShowAnswer();
+        this.viewService.bindShowAddForm();
+        this.viewService.bindRowActions(this._addNote.bind(this));
         this.viewService.bindAddToList(this._addToList.bind(this));
-        this.viewService.bindAddNote(this._addNote.bind(this));
     }
 
     setView(allQuestions) {
@@ -51,6 +50,16 @@ export default class Controller {
     }
 
     _addNote(questionId, note) {
+        const allQuestions = this.dataService.getDataFromStorage();
 
+        allQuestions.some(question => {
+            if (question.id === questionId) {
+                question.note = note;
+            }
+
+            return question.id === questionId;
+        });
+
+        this.dataService.writeToStorage(allQuestions);
     }
 }
