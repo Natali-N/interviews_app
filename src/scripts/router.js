@@ -1,7 +1,4 @@
-//@todo check if required import here as have dependency
 //@todo check if routing working with #
-import QuestionsController from './questions-page/questionsController';
-import ReportController from './report-page/reportController.js';
 
 export default class Router {
 
@@ -13,8 +10,8 @@ export default class Router {
         this.activeRoute = '';
 
         this.routes = {
-            '#questions': this.questionsController.initView,
-            '#report': this.reportController.initView
+            '#questions': this.questionsController.initView.bind(this.questionsController),
+            '#report': this.reportController.initView.bind(this.reportController)
         };
 
         this.defaultRoute = '#questions';
@@ -32,10 +29,10 @@ export default class Router {
     }
 
     _initRouter() {
-        window.addEventListener('hashchange', this._setView);
+        window.addEventListener('hashchange', this._setView.bind(this));
     }
 
-    _setView(allQuestions) {
+    _setView() {
         this.activeRoute = window.location.hash || this.defaultRoute;
         this.routes[this.activeRoute]();
     }

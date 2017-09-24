@@ -1,5 +1,4 @@
 import { configService } from './../configService';
-import { configService } from './../dataService';
 
 export default class QuestionsController {
 

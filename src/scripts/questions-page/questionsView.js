@@ -3,7 +3,7 @@ import { configService } from './../configService';
 export default class QuestionsView {
     constructor(questionsTemplate) {
         this.questionsTemplate = questionsTemplate;
-        this.questionsPage = document.querySelector('.main');
+        this.questionsPage = document.querySelector('.app');
 
         this.questionContainerSelector = '.row__content';
         this.noteContainerSelector = '.row__note';

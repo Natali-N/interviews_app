@@ -3,7 +3,7 @@ export default class QuestionsTemplate {
     prepareInitialTemplate() {
         return `
             <h2>
-                Вопросы для собеседования
+                Р’РѕРїСЂРѕСЃС‹ РґР»СЏ СЃРѕР±РµСЃРµРґРѕРІР°РЅРёСЏ
             </h2>
             <div class="questions-list">
 
@@ -11,15 +11,15 @@ export default class QuestionsTemplate {
             <div class="add-form-container">
                 <form class="add-form">
                     <label>
-                        Вопрос
+                        Р’РѕРїСЂРѕСЃ
                         <input type="text" name="question">
                     </label>
                     <label>
-                        Ответ
+                        РћС‚РІРµС‚
                         <textarea name="answer"></textarea>
                     </label>
                     <label>
-                        Строка для отображения в отчете
+                        РЎС‚СЂРѕРєР° РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІ РѕС‚С‡РµС‚Рµ
                         <input type="text" name="report">
                     </label>
                     <select name="level">
@@ -33,15 +33,10 @@ export default class QuestionsTemplate {
                         <option>SD=</option>
                         <option>SD+</option>
                     </select>
-                    <button type="button" class="add-to-list">&plus; Добавить вопрос в список</button>
+                    <button type="button" class="add-to-list">&plus; Р”РѕР±Р°РІРёС‚СЊ РІРѕРїСЂРѕСЃ РІ СЃРїРёСЃРѕРє</button>
                 </form>
-                <button class="show-add-form">Создать вопрос</button>
+                <button class="show-add-form">РЎРѕР·РґР°С‚СЊ РІРѕРїСЂРѕСЃ</button>
             </div>`;
-    }
-
-    prepareReportPage() {
-        return `
-            <h2>Report page</h2>`;
     }
 
     prepareQuestionsList(allQuestionsLeveled) {
