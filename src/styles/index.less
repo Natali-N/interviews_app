@@ -103,6 +103,7 @@ h3 {
     flex-direction: row;
     padding: 10px 0;
     border-bottom: 1px solid #dddddd;
+    min-height: 67px;
 
     .row__number,
     .row__content,
@@ -124,19 +125,39 @@ h3 {
         }
     }
 
-    .row__notes {
-        width: 100px;
+    .row__note {
+        width: 200px;
+
+        .edit-note {
+            padding-right: 40px;
+            position: relative;
+            height: 100%;
+
+            button {
+                position: absolute;
+                top: 0;
+                right: 15px;
+                padding: 1px 4px;
+                cursor: pointer;
+            }
+
+            textarea {
+                min-height: 40px;
+                height: 100%;
+                width: 100%;
+            }
+        }
     }
 
     .row__content {
-        width: ~"calc(100% - 187px)";
+        width: ~"calc(100% - 287px)";
 
         &.show {
             .answer {
                 display: block;
             }
 
-            .question {
+            .has-answer {
                 &:before {
                     transform: rotate(180deg);
                 }
@@ -146,6 +167,9 @@ h3 {
         .question {
             display: inline-block;
             padding-right: 20px;
+        }
+
+        .has-answer {
             position: relative;
             cursor: pointer;
 
@@ -164,11 +188,54 @@ h3 {
 }
 
 .add-form-container {
+    padding-top: 20px;
+
     .add-form {
         display: none;
 
-        &.show {
+        label {
             display: block;
+            padding-top: 15px;
+
+            &:first-child {
+                padding-top: 0;
+            }
+
+            input,
+            textarea {
+                display: block;
+                width: 50%;
+                margin-top: 5px;
+            }
+
+            textarea {
+                resize: none;
+                height: 90px;
+            }
+        }
+
+        select {
+            margin-top: 15px;
+            display: block;
+            width: 100px;
+        }
+
+        button {
+            margin-top: 15px;
         }
     }
+
+    &.show {
+        .add-form {
+            display: block;
+        }
+
+        .show-add-form {
+            display: none;
+        }
+    }
+}
+
+textarea {
+    resize: none;
 }

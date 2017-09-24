@@ -4,10 +4,14 @@ import { configService } from './configService';
 export default class ViewService {
     constructor(templateService) {
         this.templateService = templateService;
-        this.questionsList = document.querySelector('.questions-list');
-        this.addFormToggle = document.querySelector('.open-add-form');
-        this.addForm = document.querySelector('.add-form');
-        this.rowContent = document.querySelector('.row__content');
+        this.questionPage = document.querySelector('.main');
+        this.questionsList = this.questionPage.querySelector('.questions-list');
+        this.addFormToggle = this.questionPage.querySelector('.show-add-form');
+        this.addFormContainer = this.questionPage.querySelector('.add-form-container');
+        this.addForm = this.addFormContainer.querySelector('.add-form');
+        this.questionContainerSelector = '.row__content';
+        this.addToList = this.questionPage.querySelector('.add-to-list');
+        this.noteContainerSelector = '.row__note';
     }
 
     showData(allQuestionsLeveled) {
@@ -15,19 +19,35 @@ export default class ViewService {
     }
 
     bindOpenAddForm() {
-        this.addFormToggle.addEventListener('click', () => {
-            this.addForm.classList.add(configService.classForOpenItem);
-            this.addFormToggle.disabled = true;
-        });
+        this.addFormToggle.addEventListener('click', this.toggleForm.bind(this));
+    }
+
+    toggleForm() {
+        this.addFormContainer.classList.toggle(configService.classForOpenItem);
     }
 
     bindShowAnswer() {
-        debugger;
+        //@todo remove className
         this.questionsList.addEventListener('click', event => {
-            if (event.target.classList.contains('question')) {
-                debugger;
-                event.target.closest(configService.questionContainerSelector).classList.toggle(configService.classForOpenItem);
+            if (event.target.classList.contains('has-answer')) {
+                event.target.closest(this.questionContainerSelector).classList.toggle(configService.classForOpenItem);
             }
         });
+    }
+
+    bindAddToList(handler) {
+        //@todo form fields validation
+        this.addToList.addEventListener('click', () => {
+            handler({
+                question: this.addForm.elements.question.value,
+                answer: this.addForm.elements.answer.value,
+                report: this.addForm.elements.report.value,
+                level: this.addForm.elements.level.value
+            });
+        });
+    }
+
+    bindAddNote(handler) {
+        this.addFormContainer.classList.toggle(configService.classForOpenItem);
     }
 }

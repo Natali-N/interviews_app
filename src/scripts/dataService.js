@@ -37,9 +37,7 @@ export default class DataService {
                 let dataFromServer = JSON.parse(response).questions;
 
                 if (Array.isArray(dataFromServer)) {
-                    this.writeToStorage(dataFromServer);
-
-                    return dataFromServer;
+                    return this.writeToStorage(dataFromServer, true);
                 } else {
                     //@todo show error
                     console.log('data from server isn\'t valid');
@@ -49,10 +47,29 @@ export default class DataService {
         );
     }
 
-    writeToStorage(data) {
-        this.storage.setItem(this.name, JSON.stringify(data));
-    }
+    writeToStorage(data, requireMerge) {
+        if (requireMerge) {
+            const dataInStorage = this.getDataFromStorage();
 
+            let idStorage = {};
+
+            dataInStorage.forEach(item => {
+                idStorage[item.id] = true;
+            });
+
+            data.forEach(item => {
+                if (!idStorage[item.id]) {
+                    dataInStorage.push(item)
+                }
+            });
+
+            data = dataInStorage;
+        }
+
+        this.storage.setItem(this.name, JSON.stringify(data));
+
+        return data;
+    }
 
     getDataFromStorage() {
         let storageData = this.storage.getItem(this.name);

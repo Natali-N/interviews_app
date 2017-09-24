@@ -31,17 +31,17 @@
                     <form class="add-form">
                         <label>
                             Вопрос
-                            <input type="text">
+                            <input type="text" name="question">
                         </label>
                         <label>
                             Ответ
-                            <textarea></textarea>
+                            <textarea name="answer"></textarea>
                         </label>
                         <label>
                             Строка для отображения в отчете
-                            <input type="text">
+                            <input type="text" name="report">
                         </label>
-                        <select>
+                        <select name="level">
                             <option>JD-</option>
                             <option>JD=</option>
                             <option>JD+</option>
@@ -52,9 +52,9 @@
                             <option>SD=</option>
                             <option>SD+</option>
                         </select>
-                        <button type="button">&plus; Добавить вопрос в список</button>
+                        <button type="button" class="add-to-list">&plus; Добавить вопрос в список</button>
                     </form>
-                    <button class="open-add-form">Создать вопрос</button>
+                    <button class="show-add-form">Создать вопрос</button>
                 </div>
 
             </section>

@@ -19,7 +19,8 @@ export default class Controller {
 
         this.viewService.bindOpenAddForm();
         this.viewService.bindShowAnswer();
-
+        this.viewService.bindAddToList(this._addToList.bind(this));
+        this.viewService.bindAddNote(this._addNote.bind(this));
     }
 
     setView(allQuestions) {
@@ -36,5 +37,20 @@ export default class Controller {
         });
 
         return allQuestionsLeveled;
+    }
+
+    _addToList(questionData) {
+        questionData.id = Date.now();
+
+        const allQuestions = this.dataService.getDataFromStorage();
+        allQuestions.push(questionData);
+
+        this.dataService.writeToStorage(allQuestions);
+        this.setView(allQuestions);
+        this.viewService.toggleForm();
+    }
+
+    _addNote(questionId, note) {
+
     }
 }

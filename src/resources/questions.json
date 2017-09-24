@@ -1,36 +1,42 @@
 {
     "questions" : [
         {
+            "id": "1",
             "question": "Что такое \"DOCTYPE\"?",
             "answer": "предназначен для указания типа текущего документа",
             "report": "понятие DOCTYPE",
             "level": "JD-"
         },
         {
+            "id": "2",
             "question": "Что такое семантическая верстка?",
             "answer": "HTML-разметка и названия CSS-классов должны отражать не оформление, а смысл. Red vs warning.",
             "report": "понятие семантическая верстка",
             "level": "JD-"
         },
         {
+            "id": "3",
             "question": "Центрирование блока",
             "answer": "display: flex;\n flex-direction column;\n justify-content: center;\n align-items: center;\n\n display: flex;\n margin: auto;\n\n top: 50%;\n left: 50%;\n transform: translate(-50%, -50%);",
             "report": "центрирование блока",
             "level": "JD="
         },
         {
+            "id": "4",
             "question": "2 колоночный макет",
             "answer": "",
             "report": "2 колоночный макет",
             "level": "JD="
         },
         {
+            "id": "5",
             "question": "Что такое замыкание? sum(5)(-1) = 4",
             "answer": "Замыкание – это функция вместе со всеми внешними переменными, которые ей доступны.",
             "report": "замыкание",
             "level": "JD+"
         },
         {
+            "id": "6",
             "question": "Записать пример эмуляции класса User с одним свойством и одним методом.\n Создать класс-наследник Admin, родителем которого будет User. У админа есть своё новое свойство и свой метод.",
             "answer": "",
             "report": "Наследование",
