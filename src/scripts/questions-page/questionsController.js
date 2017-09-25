@@ -53,7 +53,7 @@ export default class QuestionsController {
         });
 
         //@todo error
-        //@todo create method in dataService
+        //@todo create method in dataService for edit field
 
         this.dataService.writeToStorage(allQuestions);
     }
@@ -70,7 +70,7 @@ export default class QuestionsController {
         });
 
         //@todo error
-        //@todo create method in dataService
+        //@todo create method in dataService for edit field
 
         this.dataService.writeToStorage(allQuestions);
     }

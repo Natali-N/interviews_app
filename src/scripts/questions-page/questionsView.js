@@ -10,6 +10,13 @@ export default class QuestionsView {
         this.noteContainerSelector = '.row__note';
         this.noteSelector = '.note';
         this.labelSelector = '.note-text';
+
+        this.hasAnswerClass = 'has-answer';
+        this.addNoteClass = 'add-note';
+        this.noteTextClass = 'note-text';
+
+        this.maxScoreValue = 3;
+        this.minScoreValue = 0;
     }
 
     findElements() {
@@ -25,6 +32,7 @@ export default class QuestionsView {
     }
 
     showQuestions(allQuestionsLeveled) {
+        // @todo require safety check (scripts inserting etc.)
         this.questionsList.innerHTML = this.questionsTemplate.prepareQuestionsList(allQuestionsLeveled);
     }
 
@@ -37,17 +45,16 @@ export default class QuestionsView {
     }
 
     bindRowActions(addNoteHandler, addScoreHandler) {
-        //@todo remove className
         this.questionsList.addEventListener('click', event => {
-            if (event.target.classList.contains('has-answer')) {
+            if (event.target.classList.contains(this.hasAnswerClass)) {
                 this._bindShowAnswer(event.target);
-            } else if (event.target.classList.contains('add-note')) {
+            } else if (event.target.classList.contains(this.addNoteClass)) {
                 this._bindAddNote(event.target, addNoteHandler);
             }
         });
 
         this.questionsList.addEventListener('dblclick', event => {
-            if (event.target.classList.contains('note-text')) {
+            if (event.target.classList.contains(this.noteTextClass)) {
                 this._bindEditNote(event.target);
             }
         });
@@ -89,16 +96,15 @@ export default class QuestionsView {
         const row = clickedElement.closest(this.rowSelector);
         const questionId = row.id;
 
-//@todo scores to variables
-        if (!isNaN(score) && score <= 3 && score >= 0) {
+        if (!isNaN(score) && score <= this.maxScoreValue && score >= this.minScoreValue) {
+            clickedElement.classList.remove(configService.classForErrorField);
             handler(questionId, score)
         } else {
-            clickedElement.classList.add('error');
+            clickedElement.classList.add(configService.classForErrorField);
         }
     }
 
     bindAddToList(handler) {
-        //@todo form fields validation
         this.addToList.addEventListener('click', () => {
             const formElements = this.addForm.elements;
             const question = formElements.question.value.trim();
@@ -107,6 +113,9 @@ export default class QuestionsView {
             const level = formElements.level.value;
 
             if (question && report && level) {
+
+                formElements.question.classList.remove(configService.classForErrorField);
+                formElements.report.classList.remove(configService.classForErrorField);
 
                 formElements.question.value = '';
                 formElements.answer.value = '';
@@ -119,7 +128,8 @@ export default class QuestionsView {
                     level: level
                 });
             } else {
-                //@todo show some error
+                formElements.question.classList.add(configService.classForErrorField);
+                formElements.report.classList.add(configService.classForErrorField);
             }
         });
     }

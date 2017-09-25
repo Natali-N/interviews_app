@@ -52,38 +52,38 @@ export default class ReportTemplate {
     prepareReportTemplate(reportData, allCheckedLeveledQuestions) {
         debugger;
         let finalReport = `
-            <h3>Отзыв на ${reportData.position} ${reportData.name}</h3>
-            <p>Текущий уровень: ${reportData.level}</p>
+            Отзыв на ${reportData.position} ${reportData.name}<br><br>
+            Текущий уровень: ${reportData.level}<br>
         `;
 
         if (reportData.english) {
-            finalReport += `
-                <p>Английский: ${reportData.english}</p>
-            `;
+            finalReport += `Английский: ${reportData.english}<br>`;
         }
 
         if (reportData.general) {
-            finalReport += `
-                <p>Общее впечатление: ${reportData.general}</p>
-            `;
+            finalReport += `Общее впечатление: ${reportData.general}<br>`;
         }
 
+        finalReport += '<br>';
+
         for (let key in allCheckedLeveledQuestions) {
-            finalReport += `<h3>${key}</h3>` + this._prepareQuestionsLevelList(allCheckedLeveledQuestions[key]);
+            if (allCheckedLeveledQuestions.hasOwnProperty(key)) {
+                finalReport += `${key}<br>` + this._prepareQuestionsLevelList(allCheckedLeveledQuestions[key]) + '<br>';
+            }
         }
 
         return finalReport;
     }
 
     _prepareQuestionsLevelList(questions) {
-        return questions.reduce((previousQuestionsPrepared, currentQuestion, index) => {
+        return questions.reduce((previousQuestionsPrepared, currentQuestion) => {
             let note = '';
 
             if (currentQuestion.note) {
-                note = currentQuestion.note;
+                note = '(' + currentQuestion.note + ')';
             }
 
-            return previousQuestionsPrepared + `<p>${currentQuestion.report}: ${currentQuestion.score} ( ${note} )</p>`;
+            return previousQuestionsPrepared + `${currentQuestion.report}: ${currentQuestion.score} ${note}<br>`;
         }, '');
     }
 }

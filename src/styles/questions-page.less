@@ -1,0 +1,121 @@
+.questions-list {
+    padding-bottom:  20px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+    border-bottom: 1px solid #dddddd;
+    min-height: 67px;
+
+    .row__number,
+    .row__content,
+    .row__score,
+    .row__notes {
+        padding-left: 10px;
+    }
+
+    .row__number {
+        flex: 0 0 37px;
+    }
+
+    .row__score {
+        flex: 0 0 50px;
+
+        .score {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    .row__note {
+        width: 200px;
+
+        &.show {
+            .edit-note {
+                display: block;
+            }
+
+            label {
+                display: none;
+            }
+        }
+
+        .edit-note {
+            padding-right: 40px;
+            position: relative;
+            height: 100%;
+            display: none;
+
+            button {
+                position: absolute;
+                top: 0;
+                right: 15px;
+                padding: 1px 4px;
+                cursor: pointer;
+            }
+
+            textarea {
+                min-height: 40px;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+
+    .row__content {
+        width: ~"calc(100% - 287px)";
+
+        &.show {
+            .answer {
+                display: block;
+            }
+
+            .has-answer {
+                &:before {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        .question {
+            display: inline-block;
+            padding-right: 20px;
+        }
+
+        .has-answer {
+            position: relative;
+            cursor: pointer;
+
+            &:before {
+                position: absolute;
+                right: 0;
+                content: '\25bc';
+                top: 0;
+            }
+        }
+
+        .answer {
+            display: none;
+        }
+    }
+}
+
+.add-form-container {
+    padding-top: 20px;
+
+    .add-form {
+        display: none;
+    }
+
+    &.show {
+        .add-form {
+            display: block;
+        }
+
+        .show-add-form {
+            display: none;
+        }
+    }
+}

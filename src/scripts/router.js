@@ -1,4 +1,4 @@
-//@todo check if routing working with #
+import { configService } from './configService';
 
 export default class Router {
 
@@ -25,6 +25,7 @@ export default class Router {
         });
 
         this.navigation = document.querySelector('.navigation');
+        this.navigationItemClass = 'navigation-item';
     }
 
     _initRouter() {
@@ -32,9 +33,9 @@ export default class Router {
 
         //@todo move somewhwere
         this.navigation.addEventListener('click', event => {
-            if (event.target.classList.contains('navigation-item')) {
-                this.navigation.querySelector('.selected').classList.remove('selected');
-                event.target.classList.add('selected');
+            if (event.target.classList.contains(this.navigationItemClass)) {
+                this.navigation.querySelector('.' + configService.classSelectedNavigationItem).classList.remove(configService.classSelectedNavigationItem);
+                event.target.classList.add(configService.classSelectedNavigationItem);
             }
         });
     }

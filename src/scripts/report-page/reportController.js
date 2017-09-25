@@ -8,7 +8,6 @@ export default class ReportController {
     }
 
     initView() {
-        const allQuestions = this.dataService.getDataFromStorage();
         this.reportView.showInitialTemplate();
         this.reportView.findElements();
         this.reportView.bindCreateReport(this._createReport.bind(this));
@@ -26,11 +25,12 @@ export default class ReportController {
 
             this.reportView.showReport(reportData, allCheckedLeveledQuestions);
         } else {
-            //@todo show error �� ����� ������ �� �������
+            //@todo show error
+            alert('Отчет не может быть сформирован. Вы не выставили балл ни по одному вопросу.')
         }
     }
 
-    //@todo ������� � helpers
+    //@todo move to helpers
     _filter(allQuestions) {
         const allQuestionsLeveled = {};
 

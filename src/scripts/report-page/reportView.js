@@ -41,7 +41,7 @@ export default class ReportView {
     }
 
     showReport(reportData, allCheckedLeveledQuestions) {
-        debugger;
+        // @todo require safety check (scripts inserting etc.)
         this.report.innerHTML = this.reportTemplate.prepareReportTemplate(reportData, allCheckedLeveledQuestions);
         this.reportFormContainer.classList.toggle(configService.classForOpenItem)
     }

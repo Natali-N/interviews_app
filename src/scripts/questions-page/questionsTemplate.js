@@ -1,3 +1,5 @@
+import { configService } from './../configService';
+
 export default class QuestionsTemplate {
 
     prepareInitialTemplate() {
@@ -45,9 +47,8 @@ export default class QuestionsTemplate {
     prepareQuestionsList(allQuestionsLeveled) {
         let preparedQuestionsList = '';
 
-        // @todo has own property
         for (let key in allQuestionsLeveled) {
-            if (allQuestionsLeveled[key].length) {
+            if (allQuestionsLeveled.hasOwnProperty(key) && allQuestionsLeveled[key].length) {
                 preparedQuestionsList += `<h3>${key}</h3>`
                     + this._prepareQuestionsLevelList(allQuestionsLeveled[key]);
             }
@@ -60,12 +61,12 @@ export default class QuestionsTemplate {
             return previousQuestionsPrepared + `
             <div id="${currentQuestion.id}" class="row">
                 <div class="row__number">${index + 1}</div>` + this._prepareQuestionContent(currentQuestion) +
-                `<div class="row__note ${currentQuestion.note ? '' : 'show'}">
+                `<div class="row__note ${currentQuestion.note ? '' : configService.classForOpenItem}">
                     <div class="edit-note">
                         <textarea class="note"></textarea>
                         <button type="button" class="add-note">&plus;</button>
                     </div>
-                    <label class="note-text">${currentQuestion.note}</label>
+                    <label class="note-text">${currentQuestion.note ? currentQuestion.note : ''}</label>
                 </div>
                 <div class="row__score">
                     <input class="score" type="number" min="0" max="3" value="${currentQuestion.score}">
