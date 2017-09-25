@@ -14,7 +14,7 @@ export default class QuestionsController {
         this.questionsView.showQuestions(this._filter(allQuestions));
 
         this.questionsView.bindShowAddForm();
-        this.questionsView.bindRowActions(this._addNote.bind(this));
+        this.questionsView.bindRowActions(this._addNote.bind(this), this._addScore.bind(this));
         this.questionsView.bindAddToList(this._addToList.bind(this));
     }
 
@@ -37,7 +37,7 @@ export default class QuestionsController {
         allQuestions.push(questionData);
 
         this.dataService.writeToStorage(allQuestions);
-        this.setView(allQuestions);
+        this.questionsView.showQuestions(this._filter(allQuestions));
         this.questionsView.toggleAddForm();
     }
 
@@ -51,6 +51,26 @@ export default class QuestionsController {
 
             return question.id === questionId;
         });
+
+        //@todo error
+        //@todo create method in dataService
+
+        this.dataService.writeToStorage(allQuestions);
+    }
+
+    _addScore(questionId, score) {
+        const allQuestions = this.dataService.getDataFromStorage();
+
+        allQuestions.some(question => {
+            if (question.id === questionId) {
+                question.score = score;
+            }
+
+            return question.id === questionId;
+        });
+
+        //@todo error
+        //@todo create method in dataService
 
         this.dataService.writeToStorage(allQuestions);
     }

@@ -5,6 +5,7 @@ export default class QuestionsView {
         this.questionsTemplate = questionsTemplate;
         this.questionsPage = document.querySelector('.app');
 
+        this.rowSelector = '.row';
         this.questionContainerSelector = '.row__content';
         this.noteContainerSelector = '.row__note';
         this.noteSelector = '.note';
@@ -35,7 +36,7 @@ export default class QuestionsView {
         this.addFormContainer.classList.toggle(configService.classForOpenItem);
     }
 
-    bindRowActions(addNoteHandler) {
+    bindRowActions(addNoteHandler, addScoreHandler) {
         //@todo remove className
         this.questionsList.addEventListener('click', event => {
             if (event.target.classList.contains('has-answer')) {
@@ -50,6 +51,12 @@ export default class QuestionsView {
                 this._bindEditNote(event.target);
             }
         });
+
+        this.questionsList.addEventListener('blur', event => {
+            if (event.target.classList.contains('score')) {
+                this._bindAddScore(event.target, addScoreHandler);
+            }
+        }, true);
     }
 
     _bindShowAnswer(clickedElement) {
@@ -57,11 +64,12 @@ export default class QuestionsView {
     }
 
     _bindAddNote(clickedElement, handler) {
-        const noteContainer = clickedElement.closest(this.noteContainerSelector);
+        const row = clickedElement.closest(this.rowSelector);
+        const noteContainer = row.querySelector(this.noteContainerSelector);
         const noteElement = noteContainer.querySelector(this.noteSelector);
         const label = noteContainer.querySelector(this.labelSelector);
         const note = noteElement.value.trim();
-        const questionId = noteElement.id;
+        const questionId = row.id;
 
         if (note) {
             label.textContent = note;
@@ -76,15 +84,38 @@ export default class QuestionsView {
         clickedElement.closest(this.noteContainerSelector).classList.toggle(configService.classForOpenItem);
     }
 
+    _bindAddScore(clickedElement, handler) {
+        const score = clickedElement.value.trim();
+        const row = clickedElement.closest(this.rowSelector);
+        const questionId = row.id;
+
+//@todo scores to variables
+        if (!isNaN(score) && score <= 3 && score >= 0) {
+            handler(questionId, score)
+        } else {
+            clickedElement.classList.add('error');
+        }
+    }
+
     bindAddToList(handler) {
         //@todo form fields validation
         this.addToList.addEventListener('click', () => {
-            handler({
-                question: this.addForm.elements.question.value,
-                answer: this.addForm.elements.answer.value,
-                report: this.addForm.elements.report.value,
-                level: this.addForm.elements.level.value
-            });
+            const formElements = this.addForm.elements;
+            const question = formElements.question.value.trim();
+            const answer = formElements.answer.value.trim();
+            const report = formElements.report.value.trim();
+            const level = formElements.level.value;
+
+            if (question && report && level) {
+                handler({
+                    question: question,
+                    answer: answer,
+                    report: report,
+                    level: level
+                });
+            } else {
+                //@todo show some error
+            }
         });
     }
 }

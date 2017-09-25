@@ -65,6 +65,7 @@ export default class DataService {
 
             data = dataInStorage.map(function(question) {
                 question.note = '';
+                question.score = '';
                 return question;
             });
         }
