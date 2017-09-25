@@ -8,17 +8,14 @@ export default class Router {
         this.reportController = reportController;
 
         this.activeRoute = '';
-
         this.routes = {
             '#questions': this.questionsController.initView.bind(this.questionsController),
             '#report': this.reportController.initView.bind(this.reportController)
         };
-
         this.defaultRoute = '#questions';
 
         //@todo spinner service
         document.querySelector('body').classList.add('show-spinner');
-
         this.dataService.getAllQuestions().then(() => {
             this._setView();
             this._initRouter();
@@ -26,10 +23,20 @@ export default class Router {
             //@todo spinner service
             document.querySelector('body').classList.remove('show-spinner');
         });
+
+        this.navigation = document.querySelector('.navigation');
     }
 
     _initRouter() {
         window.addEventListener('hashchange', this._setView.bind(this));
+
+        //@todo move somewhwere
+        this.navigation.addEventListener('click', event => {
+            if (event.target.classList.contains('navigation-item')) {
+                this.navigation.querySelector('.selected').classList.remove('selected');
+                event.target.classList.add('selected');
+            }
+        });
     }
 
     _setView() {

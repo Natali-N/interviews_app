@@ -107,6 +107,11 @@ export default class QuestionsView {
             const level = formElements.level.value;
 
             if (question && report && level) {
+
+                formElements.question.value = '';
+                formElements.answer.value = '';
+                formElements.report.value = '';
+
                 handler({
                     question: question,
                     answer: answer,

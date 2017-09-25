@@ -1,5 +1,4 @@
 //@todo правильно ли записывать все импорты и создание модулей в главный файл
-var test;
 import Router from './router';
 import DataService from './dataService';
 

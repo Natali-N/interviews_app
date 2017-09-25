@@ -52,7 +52,7 @@ export default class ReportTemplate {
     prepareReportTemplate(reportData, allCheckedLeveledQuestions) {
         debugger;
         let finalReport = `
-            <h2>Отзыв на ${reportData.position} ${reportData.name}</h2>
+            <h3>Отзыв на ${reportData.position} ${reportData.name}</h3>
             <p>Текущий уровень: ${reportData.level}</p>
         `;
 
