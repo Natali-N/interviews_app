@@ -10,4 +10,4 @@
 ## Tasks
 
 * Run `gulp dev` to start working with project
-* Run `gulp build` to compile you project like dist version (minified and uglified) in dist folder
+* Run `gulp prod` to compile you project like distributable version (minified and uglified) in dist folder

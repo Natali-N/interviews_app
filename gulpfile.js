@@ -1,14 +1,3 @@
-//@todo: rewrite readme
-//@todo remove devDependencies from package json
-//@todo check windows
-//sprites
-//оптимизация html
-//remove modules
-//separate gulp functions
-//content of html pages
-//browsersync
-//"normalize.css": "7.0.0",
-
 'use strict';
 
 const gulp = require('gulp');
@@ -39,7 +28,7 @@ const source = require('vinyl-source-stream');
 
 var isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 
-gulp.task('styles', function() {   //since
+gulp.task('styles', function() {
     return gulp.src('src/styles/main.*')
         .pipe(gulpIf(isDevelopment, sourceMaps.init()))
         .pipe(gulpIf('*.less', less()))
