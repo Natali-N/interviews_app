@@ -1,13 +1,13 @@
 {
-  "name": "starter-package-gulp",
+  "name": "Interview app",
   "version": "1.0.0",
-  "description": "Environment for promo-sites or multi-page applications development based on gulp",
+  "description": "Interview app",
   "main": "gulpfile.js",
-  "author": "Itransition HTML developers Team",
+  "author": "Natalya Nekazakova",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://git.itransition.com/projects/WDFRONTEND/repos/front-end-academy/browse/starter_packages/SPVanilla_multipages_gulp"
+    "url": "https://github.com/Natali-N/interview_app"
   },
   "devDependencies": {
     "babel-core": "7.0.0-alpha.19",

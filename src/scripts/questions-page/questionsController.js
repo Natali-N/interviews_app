@@ -45,7 +45,7 @@ export default class QuestionsController {
         const allQuestions = this.dataService.getDataFromStorage();
 
         allQuestions.some(question => {
-            if (question.id === questionId) {
+            if (question.id == questionId) {
                 question.note = note;
             }
 

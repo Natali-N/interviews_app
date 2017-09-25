@@ -50,7 +50,6 @@ export default class ReportTemplate {
     }
 
     prepareReportTemplate(reportData, allCheckedLeveledQuestions) {
-        debugger;
         let finalReport = `
             Отзыв на ${reportData.position} ${reportData.name}<br><br>
             Текущий уровень: ${reportData.level}<br>
