@@ -25,51 +25,59 @@ const browserSync = require('browser-sync').create();
 const browserify = require('browserify');
 const babelify = require('babelify');
 const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const gutil = require('gulp-util');
 
 var isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 
 gulp.task('styles', function() {
     return gulp.src('src/styles/main.*')
-        .pipe(gulpIf(isDevelopment, sourceMaps.init()))
-        .pipe(gulpIf('*.less', less()))
+        .pipe(isDevelopment ? sourceMaps.init() : gutil.noop())
+        .pipe(less())
         .pipe(autoPrefixer())
         .pipe(remember('styles'))
-        .pipe(gulpIf(isDevelopment, sourceMaps.write()))
-        .pipe(gulpIf(!isDevelopment, cssNano()))
-        .pipe(gulp.dest(isDevelopment ? 'dist/dev/styles' : 'dist/build/styles'));
+        .pipe(isDevelopment ? sourceMaps.write() : gutil.noop())
+        .pipe(!isDevelopment ? cssNano() : gutil.noop())
+        .pipe(gulp.dest(isDevelopment ? 'dist/dev/styles' : 'dist/prod/styles'));
 });
 
 gulp.task('html', function() {
     return gulp.src('src/pages/*.html', { since: gulp.lastRun('html') })
         .pipe(newer(isDevelopment ? 'dist/dev' : 'dist/prod'))
-        .pipe(gulpIf(!isDevelopment, htmlMin()))
+        .pipe(!isDevelopment ? htmlMin() : gutil.noop())
         .pipe(gulp.dest(isDevelopment ? 'dist/dev' : 'dist/prod'));
 });
 
 gulp.task('resources', function() {
     return gulp.src('src/resources/**', { since: gulp.lastRun('resources') })
         .pipe(newer(isDevelopment ? 'dist/dev/resources' : 'dist/prod/resources'))
-        .pipe(debug({ title: 'resources' }))
         .pipe(gulp.dest(isDevelopment ? 'dist/dev/resources' : 'dist/prod/resources'));
 });
 
 gulp.task('scripts', function() {
     return browserify(
-        'src/scripts/app.js',
-        'src/scripts/dataService.js',
-        'src/scripts/router.js',
-        'src/scripts/configService.js',
-        'src/scripts/questions-page/questionsController.js',
-        'src/scripts/questions-page/questionsView.js',
-        'src/scripts/questions-page/questionsTemplate.js',
-        'src/scripts/report-page/reportController.js',
-        'src/scripts/report-page/reportView.js',
-        'src/scripts/report-page/reportTemplate.js'
+            'src/scripts/app.js',
+            'src/scripts/dataService.js',
+            'src/scripts/router.js',
+            'src/scripts/configService.js',
+            'src/scripts/questions-page/questionsController.js',
+            'src/scripts/questions-page/questionsView.js',
+            'src/scripts/questions-page/questionsTemplate.js',
+            'src/scripts/report-page/reportController.js',
+            'src/scripts/report-page/reportView.js',
+            'src/scripts/report-page/reportTemplate.js'
         )
         .transform('babelify', { presets: ['env'] })
         .bundle()
+        .on('error', err => {
+            gutil.log("Browserify Error", gutil.colors.red(err.message))
+        })
         .pipe(source('bundle.js'))
-        .pipe(gulp.dest('dist/dev/scripts'));
+        .pipe(buffer())
+        .pipe(!isDevelopment ? jsMin() : gutil.noop())
+        .pipe(isDevelopment ? sourceMaps.init() : gutil.noop())
+        .pipe(isDevelopment ? sourceMaps.write() : gutil.noop())
+        .pipe(gulp.dest(isDevelopment ? 'dist/dev/scripts' : 'dist/prod/scripts'));
 });
 
 gulp.task('enable:production', function(callback) {
@@ -102,8 +110,10 @@ gulp.task('serve', function() {
 
 gulp.task('build', gulp.series(
     'clean',
-    gulp.parallel('html', 'styles', 'resources', 'scripts'),
+    gulp.parallel('styles', 'resources', 'scripts'),
     'html'
 ));
 
 gulp.task('dev', gulp.series('build', gulp.parallel('watch', 'serve')));
+
+gulp.task('prod', gulp.series('enable:production', 'build'));
