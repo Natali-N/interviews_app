@@ -1,5 +1,5 @@
 {
-  "name": "Interview app",
+  "name": "InterviewApp",
   "version": "1.0.0",
   "description": "Interview app",
   "main": "gulpfile.js",
@@ -7,7 +7,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Natali-N/interview_app"
+    "url": "https://github.com/Natali-N/interviews_app"
   },
   "devDependencies": {
     "babel-core": "7.0.0-alpha.19",
@@ -18,26 +18,15 @@
     "del": "3.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "4.0.0",
-    "gulp-babel": "7.0.0",
-    "gulp-cached": "1.1.1",
-    "gulp-concat": "2.6.1",
     "gulp-cssnano": "2.1.2",
-    "gulp-debug": "3.1.0",
     "gulp-eslint": "4.0.0",
-    "gulp-file-include": "1.1.0",
     "gulp-htmlmin": "3.0.0",
-    "gulp-if": "2.0.2",
-    "gulp-imagemin": "3.3.0",
     "gulp-jsmin": "0.1.5",
     "gulp-less": "3.3.2",
     "gulp-newer": "1.3.0",
     "gulp-remember": "0.3.1",
-    "gulp-sass": "3.1.0",
     "gulp-sourcemaps": "2.6.0",
-    "gulp-useref": "3.1.2",
     "gulp-util": "3.0.8",
-    "normalize.css": "7.0.0",
-    "path": "0.12.7",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0"
   },

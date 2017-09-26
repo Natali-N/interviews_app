@@ -1,27 +1,17 @@
 'use strict';
 
 const gulp = require('gulp');
-const gulpIf = require('gulp-if');
 const less = require('gulp-less');
-const sass = require('gulp-sass');
 const sourceMaps = require('gulp-sourcemaps');
 const autoPrefixer = require('gulp-autoprefixer');
 const remember = require('gulp-remember');
 const cssNano = require('gulp-cssnano');
-const fileInclude = require('gulp-file-include');
-const useRef = require('gulp-useref');
-const imageMin = require('gulp-imagemin');
 const newer = require('gulp-newer');
-const debug = require('gulp-debug');
-const babel = require('gulp-babel');
 const eslint = require('gulp-eslint');
 const jsMin = require('gulp-jsmin');
 const del = require('del');
-const path = require('path');
 const htmlMin = require('gulp-htmlmin');
-const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
-
 const browserify = require('browserify');
 const babelify = require('babelify');
 const source = require('vinyl-source-stream');
@@ -56,21 +46,21 @@ gulp.task('resources', function() {
 
 gulp.task('scripts', function() {
     return browserify(
-            'src/scripts/app.js',
-            'src/scripts/dataService.js',
-            'src/scripts/router.js',
-            'src/scripts/configService.js',
-            'src/scripts/questions-page/questionsController.js',
-            'src/scripts/questions-page/questionsView.js',
-            'src/scripts/questions-page/questionsTemplate.js',
-            'src/scripts/report-page/reportController.js',
-            'src/scripts/report-page/reportView.js',
-            'src/scripts/report-page/reportTemplate.js'
-        )
+        'src/scripts/app.js',
+        'src/scripts/dataService.js',
+        'src/scripts/router.js',
+        'src/scripts/configService.js',
+        'src/scripts/questions-page/questionsController.js',
+        'src/scripts/questions-page/questionsView.js',
+        'src/scripts/questions-page/questionsTemplate.js',
+        'src/scripts/report-page/reportController.js',
+        'src/scripts/report-page/reportView.js',
+        'src/scripts/report-page/reportTemplate.js'
+    )
         .transform('babelify', { presets: ['env'] })
         .bundle()
         .on('error', err => {
-            gutil.log("Browserify Error", gutil.colors.red(err.message))
+            gutil.log('Browserify Error', gutil.colors.red(err.message))
         })
         .pipe(source('bundle.js'))
         .pipe(buffer())
